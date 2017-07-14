@@ -1,0 +1,45 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+
+public class App {
+		 public static void main(String[] args)  {
+			 URL U;
+
+				try {
+			 //String S="C:\\Users\\faiza\\Downloads\\LINKS";
+			 U=new URL("https://www.google.com.pk/");
+			URLConnection conn = U.openConnection();
+			 BufferedReader BR = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			// String FileName="C:\\Users\\faiza\\Downloads\\FINAL\\";
+			 String inputLine;
+			 File file = new File("C:\\Users\\faiza\\Downloads\\FINAL");
+			 if (!file.exists()) {
+					file.createNewFile();
+				}
+			 FileWriter fw = new FileWriter(file.getAbsoluteFile());
+			 BufferedWriter bw = new BufferedWriter(fw);
+			 while ((inputLine = BR.readLine()) != null) {
+					bw.write(inputLine);
+				}
+
+				bw.close();
+				BR.close();
+
+				System.out.println("Done");
+			
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+	}
+
+}
